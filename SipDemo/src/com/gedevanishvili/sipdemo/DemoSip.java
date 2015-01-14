@@ -10,7 +10,7 @@ import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
 
 public class DemoSip {
-	private String domain = "sip.online.ge";
+	private String domain = "domain";
 	private String username = "username";
 	private String password = "password";
 	private SipManager mSipManager = null;
