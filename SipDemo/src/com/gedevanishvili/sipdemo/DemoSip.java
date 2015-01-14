@@ -11,8 +11,8 @@ import android.net.sip.SipRegistrationListener;
 
 public class DemoSip {
 	private String domain = "sip.online.ge";
-	private String username = "2000211";
-	private String password = "wXeHi4RfC2";
+	private String username = "username";
+	private String password = "password";
 	private SipManager mSipManager = null;
 	private SipProfile mSipProfile = null;
 	private SipAudioCall call;
