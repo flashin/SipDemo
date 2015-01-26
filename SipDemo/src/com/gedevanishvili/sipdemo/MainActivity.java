@@ -7,16 +7,24 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	
-	private DemoSip DemoSip = null;
-	
+
+	private DemoSipBango DemoSip = null;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		DemoSip = new DemoSip(this);
+
+		if (DemoSip == null) {
+			DemoSip = new DemoSipBango(this);
+
+			try {
+				DemoSip.init();
+			} catch (Exception e) {
+				MyAlert.alertWin(this, e.getMessage());
+			}
+		}
 	}
 
 	/**
@@ -32,7 +40,7 @@ public class MainActivity extends Activity {
 		TextView tv = (TextView) findViewById(R.id.number_container);
 
 		str = tv.getText().toString() + str;
-		if (str.length() < 13){
+		if (str.length() < 13) {
 			tv.setText(str);
 		}
 	}
@@ -44,15 +52,19 @@ public class MainActivity extends Activity {
 
 		TextView tv = (TextView) findViewById(R.id.number_container);
 		tv.setText("");
-		
+
 		DemoSip.endCall();
 	}
-	
+
 	/**
 	 * Disconnect
 	 */
-	public void disconnectCall(){
-		DemoSip.endCall();
+	public void disconnectCall() {
+		try {
+			DemoSip.endCall();
+		} catch (Exception e) {
+			MyAlert.alertWin(this, e.toString());
+		}
 	}
 
 	/**
@@ -62,7 +74,20 @@ public class MainActivity extends Activity {
 
 		TextView tv = (TextView) findViewById(R.id.number_container);
 		String number = tv.getText().toString();
-		
-		DemoSip.initCall(number);
+
+		try {
+			DemoSip.initCall(number);
+		} catch (Exception e) {
+			MyAlert.alertWin(this, e.toString());
+		}
+	}
+
+	/**
+	 * Start call
+	 */
+	public void ChangeSipStatus(String status) {
+
+		TextView tv = (TextView) findViewById(R.id.status_cont);
+		tv.setText("Status: " + status);
 	}
 }

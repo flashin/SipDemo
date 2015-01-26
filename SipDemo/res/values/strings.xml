@@ -20,5 +20,6 @@
     
     <string name="phone_call">Call</string>
     <string name="phone_clear">Clear</string>
+    <string name="phone_cancel">Cancel</string>
 
 </resources>

@@ -7,6 +7,9 @@ package com.gedevanishvili.sipdemo;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+
+import org.doubango.ngn.sip.NgnAVSession;
 
 /**
  *
@@ -68,5 +71,33 @@ public class MyAlert {
     		alertDialog.cancel();
     		alertDialog = null;
     	}
+    }
+    
+    public static void alertIncomingCall(Context context, final NgnAVSession avSession){
+    	
+    	//start activity
+    	Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    	
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setTitle("Incoming call");
+        
+        String fromNumber = avSession.getRemotePartyDisplayName();
+        alertDialogBuilder.setMessage(fromNumber);
+        alertDialogBuilder.setPositiveButton("Answer", new DialogInterface.OnClickListener(){  
+                    public void onClick(DialogInterface dialog, int id) {
+                        avSession.acceptCall();
+                    	dialog.dismiss(); 
+                    }
+                });
+        alertDialogBuilder.setNegativeButton("Reject", new DialogInterface.OnClickListener(){  
+            public void onClick(DialogInterface dialog, int id) {
+            	avSession.hangUpCall();
+                dialog.dismiss(); 
+            }  
+        });
+        
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

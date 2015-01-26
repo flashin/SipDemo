@@ -132,6 +132,14 @@
             android:layout_weight="1"
             android:text="@string/phone_call"
             android:onClick="startCall" />
+
+        <Button
+            android:id="@+id/but_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/phone_cancel"
+            android:onClick="clearNumberPlate" />
     </TableRow>
 
     <TableRow>
@@ -143,6 +151,17 @@
             android:layout_weight="1"
             android:text="@string/phone_clear"
             android:onClick="clearNumberPlate" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/status_cont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp"
+            android:textSize="15sp"
+            android:text="Status: not registered" />
     </TableRow>
 
 </TableLayout>
